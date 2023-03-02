@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  nginx:
+    image: nginx:1.19.6-alpine
+    container_name: fox-nginx
+    privileged: true
+    restart: always
+    network_mode: "host"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8860:8860"
+    environment:
+      TZ: "UTC"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./conf:/etc/nginx
+      - ./logs:/var/log/nginx
+      - ./wwwroot:/var/wwwroot

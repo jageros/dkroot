@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  nexus3:
+    image: sonatype/nexus3
+    container_name: nexus3
+    privileged: true # 特权模式
+    ports:
+      - 8081:8081
+      - 8066:8066
+    volumes:
+      - ./data:/nexus-data
+    restart: always
+

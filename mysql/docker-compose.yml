@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: fox-mysql
+    privileged: true
+    restart: always
+    network_mode: "host"
+    hostname: fox-mysql
+   
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./conf.d:/etc/mysql/conf.d
+      - ./data:/var/lib/mysql
+    environment:
+      TZ: "UTC"
+      MYSQL_ROOT_PASSWORD: 123456

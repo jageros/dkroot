@@ -1,0 +1,52 @@
+server {
+    listen 80;
+    server_name _; #city.fantasyland.ink;
+    root /var/wwwroot/pokerking/;
+
+    location ~* \.(html|htm|shtml|zip|rar|doc|docx|xls|xlsx|ppt|ppts|gif|jpg|jpeg|png|bmp|swf|ico|js|css)$ {
+        add_header Access-Control-Allow-Origin *;
+        add_header Access-Control-Allow-Headers Authorization,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,Keep-Alive,X-Requested-With,Pragma,Cache-Control,If-Modified-Since,token;
+        add_header Access-Control-Allow-Methods GET,POST,OPTIONS;
+   }
+    
+    # add_header 'Access-Control-Allow-Origin' '*'; #允许的请求来源，* 为所有
+    # add_header 'Access-Control-Allow-Credentials' 'true' ; #是否允许浏览器后续请求携带认证信息（cookies）,该值只能是true,如果服务器不要浏览器发送Cookie，删除该字段即可。
+    # add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS'; #的值是逗号分隔的一个字符串，表明服务器支持的所有跨域请求的方法。注意，返回的是所有支持的方法，而不单是浏览器请求的那个方法。这是为了避免多次"预检"请求
+    # add_header 'Access-Control-Allow-Headers' 'Authorization,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,Keep-Alive,X-Requested-With,Pragma,Cache-Control,If-Modified-Since,token';
+    # add_header 'Access-Control-Max-Age' 1728000;
+
+    # 被挂在的目录
+    location / {
+        root /var/wwwroot/pokerking/;
+        index index.html index.htm;
+    }
+
+    location ~ /\. {
+        deny all;
+    }
+
+    location ~ \.(js|css|png|jpg|gif|swf|ico|pdf|mov|fla|zip|rar)$ {
+        try_files $uri =404;
+    }
+
+    location ~* .(jpg|jpeg|png|gif|ico|css|js)$ {
+        expires 1h;
+        add_header Cache-Control public;
+        add_header Pragma public;
+        add_header Vary Accept-Encoding;
+    }
+
+    # security headers
+#     add_header X-Frame-Options "SAMEORIGIN" always;
+#     add_header X-XSS-Protection "1; mode=block" always;
+#     add_header X-Content-Type-Options "nosniff" always;
+#     add_header Referrer-Policy "no-referrer-when-downgrade" always;
+#     add_header Content-Security-Policy "default-src * data: 'unsafe-eval' 'unsafe-inline'" always;
+#     add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+    # gzip
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_types text/plain text/css text/xml application/json application/javascript application/xml+rss application/atom+xml image/svg+xml;
+}
