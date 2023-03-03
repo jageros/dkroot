@@ -3,12 +3,12 @@ version: "3.8"
 services:
   redis:
     image: redis:5-alpine
-    container_name: fox-redis
+    container_name: redis
     privileged: true
     user: root
     restart: always
     network_mode: "host"
-    hostname: fox-redis
+    hostname: redis
     command: redis-server /conf.d/redis.conf --appendonly yes
     volumes:
       - /etc/localtime:/etc/localtime:ro

@@ -3,11 +3,11 @@ version: "3.8"
 services:
   mysql:
     image: mysql:8.0
-    container_name: mysql
+    container_name: fox-mysql
     privileged: true
     restart: always
     network_mode: "host"
-    hostname: mysql
+    hostname: fox-mysql
    
     volumes:
       - /etc/localtime:/etc/localtime:ro

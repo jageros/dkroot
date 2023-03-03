@@ -1,0 +1,2 @@
+# minidoc
+data => minidoc

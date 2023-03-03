@@ -8,12 +8,7 @@ services:
     ports:
       - 8181:8181
     volumes:
-      - ./conf://mindoc/conf
-      - ./static://mindoc/static
-      - ./views://mindoc/views
-      - ./uploads://mindoc/uploads
-      - ./runtime://mindoc/runtime
-      - ./database://mindoc/database
+      - ./data:/mindoc
     environment:
       - MINDOC_RUN_MODE=prod
       - MINDOC_DB_ADAPTER=sqlite3
