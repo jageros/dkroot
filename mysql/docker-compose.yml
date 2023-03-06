@@ -12,6 +12,8 @@ services:
       fox-net:
         aliases:
           - mysql
+    ports:
+      - "3306:3306"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./conf/mysql:/etc/mysql
