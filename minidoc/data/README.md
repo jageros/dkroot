@@ -1,2 +1,0 @@
-# minidoc
-data => minidoc

@@ -6,9 +6,12 @@ services:
     container_name: mysql
     privileged: true
     restart: always
-    network_mode: "host"
-    hostname: mysql
-   
+#    network_mode: "host"
+#    hostname: mysql
+    networks:
+      fox-net:
+        aliases:
+          - mysql
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./conf/mysql:/etc/mysql
@@ -17,3 +20,7 @@ services:
     environment:
       TZ: "UTC"
       MYSQL_ROOT_PASSWORD: 123456
+
+networks:
+  fox-net:
+    external: true
