@@ -1,0 +1,16 @@
+version: '3.1'
+services:
+  jenkins:
+    image: easysoft/zentao:latest
+    restart: always
+    network_mode: "host"
+    hostname: zentao
+    container_name: zentao
+    privileged: true # 特权模式
+    user: root
+    environment:
+      - "MYSQL_ROOT_PASSWORD=zentao12345678"
+      - "TZ=Asia/Shanghai"
+    volumes:
+    - ./data/www/zentaopms:/www/zentaopms
+    - ./data/mysql:/var/lib/mysql
