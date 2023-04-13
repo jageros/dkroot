@@ -22,7 +22,7 @@ services:
       - BASE_URL=http://localhost:3000
       - TRUST_PROXY=0
       - DATABASE_URL=postgresql://postgres@postgres/planka
-      - SECRET_KEY=notsecretkey
+      - SECRET_KEY=f7e960fd9cd3fffa5fb2fdd9009404c720bb66b7b17bc78665a1167c1bdc7a6d83a6735ed53e857514bc1bddb7d30c320478962285950be046c4b514d800b1ad
 
       # related: https://github.com/knex/knex/issues/2354
       # As knex does not pass query parameters from the connection string we
