@@ -6,8 +6,8 @@ services:
     container_name: mysql
     privileged: true
     restart: always
-    network_mode: "host"
-    hostname: fox-mysql
+    ports:
+      - "3306:3306"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./conf/mysql:/etc/mysql

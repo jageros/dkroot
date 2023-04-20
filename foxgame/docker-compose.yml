@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  foxgame:
+    image: registry.cn-hongkong.aliyuncs.com/foxgame/server:1.0.0-16-g52555eb
+    container_name: foxgame
+    privileged: true
+    restart: always
+#    network_mode: "host"
+#    hostname: fox-game
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./data:/data
+    environment:
+      TZ: "UTC"

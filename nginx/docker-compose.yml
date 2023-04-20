@@ -6,11 +6,11 @@ services:
     container_name: nginx
     privileged: true
     restart: always
-    network_mode: "host"
-    hostname: nginx
-#    ports:
-#      - "80:80"
-#      - "443:443"
+#    network_mode: "host"
+#    hostname: nginx
+    ports:
+      - "80:80"
+      - "443:443"
 #      - "8860:8860"
     environment:
       TZ: "UTC"

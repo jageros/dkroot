@@ -16,3 +16,5 @@
 # vendor/
 
 data/
+logs/
+foxadmin/
