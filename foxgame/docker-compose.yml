@@ -14,6 +14,10 @@ services:
       - "8001:8001"
       - "8002:8002"
     volumes:
-      - ./data:/data
+      - ./data/logs:/data/logs
+      - ./data/static:/data/static
+      - ./data/conf.d:/data/conf.d
+      - ../nginx/conf/conf.d:/nginx/conf.d
+      - ../nginx/wwwroot:/nginx/wwwroot
     environment:
       TZ: "UTC"
