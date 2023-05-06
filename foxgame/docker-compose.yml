@@ -19,6 +19,6 @@ services:
       - ./data/conf.d:/data/conf.d
       - ../nginx/conf/conf.d:/nginx/conf.d
       - ../nginx/wwwroot:/nginx/wwwroot
-      - /var/run/docker.sock:/var/run/docker.sock
+#      - /var/run/docker.sock:/var/run/docker.sock
     environment:
       TZ: "UTC"
