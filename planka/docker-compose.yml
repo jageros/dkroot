@@ -17,9 +17,9 @@ services:
       - ./data/project-background-images:/app/public/project-background-images
       - ./data/attachments:/app/private/attachments
     ports:
-      - 3000:1337
+      - "3001:1337"
     environment:
-      - BASE_URL=http://localhost:3000
+      - BASE_URL=http://plan.hawtech.cn
       - TRUST_PROXY=0
       - DATABASE_URL=postgresql://postgres@postgres/planka
       - SECRET_KEY=f7e960fd9cd3fffa5fb2fdd9009404c720bb66b7b17bc78665a1167c1bdc7a6d83a6735ed53e857514bc1bddb7d30c320478962285950be046c4b514d800b1ad

@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   foxgame:
-    image: registry.cn-hongkong.aliyuncs.com/foxgame/server:1.0.0-16-g52555eb
+    image: registry.cn-hongkong.aliyuncs.com/foxgame/server:1.1.7-43-geaa287f
     container_name: foxgame
     privileged: true
     restart: always
@@ -12,6 +12,7 @@ services:
       - "host.docker.internal:host-gateway"
     ports:
       - "8001:8001"
+      - "8002:8002"
     volumes:
       - ./data:/data
     environment:
