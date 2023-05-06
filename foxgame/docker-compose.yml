@@ -8,6 +8,8 @@ services:
     restart: always
 #    network_mode: "host"
 #    hostname: fox-game
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - "8001:8001"
     volumes:
