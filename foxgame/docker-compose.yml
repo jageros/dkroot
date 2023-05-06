@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   foxgame:
-    image: registry.cn-hongkong.aliyuncs.com/foxgame/server:1.1.7-43-geaa287f
+    image: registry.cn-hongkong.aliyuncs.com/foxgame/server:1.1.7-47-g957b960
     container_name: foxgame
     privileged: true
     restart: always
@@ -19,5 +19,6 @@ services:
       - ./data/conf.d:/data/conf.d
       - ../nginx/conf/conf.d:/nginx/conf.d
       - ../nginx/wwwroot:/nginx/wwwroot
+      - /var/run/docker.sock:/var/run/docker.sock
     environment:
       TZ: "UTC"
