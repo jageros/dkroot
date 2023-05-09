@@ -4,7 +4,7 @@ networks:
     external: true            #宣告网络
 services:
   openwrt:
-    image: unifreq/openwrt-aarch64    #镜像名称  树莓派
+    image: sulinggg/openwrt    #镜像名称  树莓派
     container_name: openwrt           #容器名称
     networks:
       - macnet                  #网络名称
