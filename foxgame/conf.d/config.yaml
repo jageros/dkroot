@@ -1,0 +1,58 @@
+mode: release
+
+server:
+  http:
+    listen_ip: 0.0.0.0
+    port: 8001
+    read_timeout: 10s
+    write_timeout: 10s
+    close_timeout: 10s
+    rate_time: 0.001s
+  grpc:
+    listen_ip: 0.0.0.0
+    port: 8002
+    timeout: 10s
+
+log:
+  level: release
+  log_path: /data/logs/fox.log
+  stdout: false
+  caller: true
+  source: fox-server
+  max_file_size: 100
+  max_backups: 7
+  max_age: 7
+  compress: true
+
+data:
+  mysql:
+    addr: host.docker.internal:3306 # 地址
+    user: root #用户名
+    password: "FoxGame^666" # 密码
+    database: fox_game # 数据库
+    max_idle_conn: 10 # 最大空闲连接
+    max_open_conn: 100 # 最大连接数
+    log_mode: info # 日志模式， options： silent, error, warn, info
+    conn_max_lifetime: 7200s # 连接超时时间
+    log_slow_threshold: 0.2s # 查询耗时过大警告日志，毫秒（ms）
+  redis:
+    addr: host.docker.internal:6379
+    read_timeout: 0.2s
+    write_timeout: 0.2s
+
+ding_talk:
+  enable: true
+  flag: "正式服"
+  url: "https://oapi.dingtalk.com/robot/send?access_token=01851e8a79320429f46ff94701165a9bd6130e85a21b4d19f055f6bf37406587"
+  secret: "SECded1004be1c8f097e8a1f83273745f9280233a1222cc70a1dffc4b7dd040712c"
+
+health:
+  enable: false
+  url: ""
+
+other:
+  static_path: "/data/static"
+  nginx_conf_path: "/nginx/conf.d"
+  web_root_path: "/nginx/wwwroot"
+  stat_fetch: true
+  geo_ip_file_path: "/data/conf.d/GeoIP2-City.mmdb"

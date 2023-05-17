@@ -18,3 +18,4 @@
 data/
 logs/
 foxadmin/
+nginx/wwwroot/update_local_fox_web.sh

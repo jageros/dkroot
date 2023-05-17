@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  foxgame:
+    image: registry.cn-hongkong.aliyuncs.com/foxgame/server:__tag__
+    container_name: foxgame
+    privileged: true
+    restart: always
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "8001:8001"
+      - "8002:8002"
+    volumes:
+      - ./data/logs:/data/logs
+      - ./data/static:/data/static
+      - ./data/conf.d:/data/conf.d
+      - ../nginx/conf/conf.d:/nginx/conf.d
+      - ../nginx/wwwroot:/nginx/wwwroot
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      TZ: "UTC"
