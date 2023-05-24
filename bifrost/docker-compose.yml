@@ -1,0 +1,14 @@
+version: "3.8"
+# https://github.com/brokercap/Bifrost
+services:
+  bifrost:
+    image: jc3wish/bifrost:latest
+    container_name: bifrost
+    restart: always
+    ports:
+      - "21036:21036"
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./data/etc:/opt/server/etc
+      - ./data/data:/opt/server/data
+      - ./data/logs:/opt/server/log
