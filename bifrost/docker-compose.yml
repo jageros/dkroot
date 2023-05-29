@@ -2,13 +2,15 @@ version: "3.8"
 # https://github.com/brokercap/Bifrost
 services:
   bifrost:
-    image: jc3wish/bifrost:latest
+    image: jayos/bifrost:latest
     container_name: bifrost
     restart: always
     ports:
       - "21036:21036"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - /etc/localtime:/etc/localtime
-      - ./data/etc:/opt/server/etc
-      - ./data/data:/opt/server/data
-      - ./data/logs:/opt/server/log
+      - ./data/etc:/linux/etc
+      - ./data/data:/data
+      - ./data/logs:/logs
