@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  nsqlookupd:
+    image: nsqio/nsq:latest
+    command: /nsqlookupd
+    hostname: nsqlookupd
+    restart: always
+    privileged: true
+    ports:
+      - "4160:4160"
+      - "4161:4161"
+    volumes:
+      - ./data/nsqd:/data
+
+  nsqd:
+    image: nsqio/nsq:latest
+    command: /nsqd --lookupd-tcp-address=nsqlookupd:4160 --broadcast-address=host.docker.internal
+    hostname: nsqd
+    restart: always
+    privileged: true
+    ports:
+      - "4150:4150"
+      - "4151:4151"
+    volumes:
+      - ./data/nsq:/data
+    depends_on:
+      - nsqlookupd
+
+  nsqadmin:
+    image: nsqio/nsq:latest
+    command: /nsqadmin --lookupd-http-address=nsqlookupd:4161
+    hostname: nsqadmin
+    restart: always
+    privileged: true
+    ports:
+      - "4171:4171"
+    volumes:
+      - ./data/nsqadmin:/data
+    depends_on:
+      - nsqlookupd
