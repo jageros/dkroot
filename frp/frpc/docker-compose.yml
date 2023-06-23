@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   frpc:
-    image: snowdreamtech/frp
+    image: snowdreamtech/frpc
     container_name: frpc
     privileged: true
     restart: always
