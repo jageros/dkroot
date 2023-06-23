@@ -1,86 +1,47 @@
 version: '3.8'
 
 services:
-
-  kafka1:
-    image: confluentinc/cp-kafka:latest
-    container_name: kafka1
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
     privileged: true
     restart: always
-    hostname: kafka1
-    environment:
-      KAFKA_KRAFT_MODE: "true"
-      KAFKA_KRAFT_BROKER_ID: 1
-      CLUSTER_ID: "fox_cluster_kafka_1000"
-      KAFKA_PROCESS_ROLES: "broker,controller"
-      KAFKA_NODE_ID: 1
-      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka1:9093,2@kafka2:9093,3@kafka3:9093"
-      KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
-      KAFKA_LOG_DIRS: "/var/lib/kafka/data"
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
-      KAFKA_LISTENERS: "PLAINTEXT://:9092,CONTROLLER://:9093"
-      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://localhost:9092"
-    volumes:
-      - ./data/kafka1:/var/lib/kafka/data
     ports:
-      - 9092:9092
+      - "2181:2181"
+    volumes:
+      - ./data/zookeeper/data:/var/lib/zookeeper/data
+      - ./data/zookeeper/log:/var/lib/zookeeper/log
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
 
-  kafka2:
+  kafka:
     image: confluentinc/cp-kafka:latest
-    container_name: kafka2
+    container_name: kafka
     privileged: true
     restart: always
-    hostname: kafka2
-    environment:
-      KAFKA_KRAFT_MODE: "true"
-      KAFKA_KRAFT_BROKER_ID: 2
-      CLUSTER_ID: "fox_cluster_kafka_1000"
-      KAFKA_PROCESS_ROLES: "broker,controller"
-      KAFKA_NODE_ID: 2
-      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka1:9093,2@kafka2:9093,3@kafka3:9093"
-      KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
-      KAFKA_LOG_DIRS: "/var/lib/kafka/data"
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
-      KAFKA_LISTENERS: "PLAINTEXT://:9092,CONTROLLER://:9093"
-      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://localhost:9092"
+    ports:
+      - "9092:9092"
     volumes:
-      - ./data/kafka2:/var/lib/kafka/data
-    ports:
-      - 9093:9092
-
-  kafka3:
-    image: confluentinc/cp-kafka:latest
-    container_name: kafka3
-    privileged: true
-    restart: always
-    hostname: kafka3
-    environment:
-      KAFKA_KRAFT_MODE: "true"
-      KAFKA_KRAFT_BROKER_ID: 3
-      CLUSTER_ID: "fox_cluster_kafka_1000"
-      KAFKA_PROCESS_ROLES: "broker,controller"
-      KAFKA_NODE_ID: 3
-      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka1:9093,2@kafka2:9093,3@kafka3:9093"
-      KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
-      KAFKA_LOG_DIRS: "/var/lib/kafka/data"
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
-      KAFKA_LISTENERS: "PLAINTEXT://:9092,CONTROLLER://:9093"
-      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://localhost:9092"
-    volumes:
-      - ./data/kafka3:/var/lib/kafka/data
-    ports:
-      - 9094:9092
-
-  kafka-cc:
-    image: confluentinc/cp-enterprise-control-center:latest
-    container_name: kafka-cc
-    ports:
-      - 9021:9021
-    environment:
-      CONTROL_CENTER_BOOTSTRAP_SERVERS: kafka1:9092,kafka2:9092,kafka3:9092
-      CONTROL_CENTER_KAFKA_CLUSTER_ID: "fox_cluster_kafka_1000"
-      CONTROL_CENTER_REPLICATION_FACTOR: 2
+      - ./data/kafka:/var/lib/kafka/data
     depends_on:
-      - kafka1
-      - kafka2
-      - kafka3
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+
+
+  kafka-manager:
+    image: hlebalbau/kafka-manager:latest
+    container_name: kafka-manager
+    privileged: true
+    restart: always
+    ports:
+      - "9010:9000"
+    environment:
+      ZK_HOSTS: zookeeper:2181
+    depends_on:
+      - kafka
