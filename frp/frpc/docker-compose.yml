@@ -9,4 +9,3 @@ services:
     volumes:
       - ./frpc.ini:/etc/frp/frpc.ini  # 替换为你的frpc.ini配置文件路径
     command: frpc -c /etc/frp/frpc.ini
-
