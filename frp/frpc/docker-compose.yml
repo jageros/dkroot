@@ -1,13 +1,13 @@
 version: '3.8'
 
+# docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc.ini --name frpc snowdreamtech/frpc
 services:
   frpc:
     image: snowdreamtech/frpc
     container_name: frpc
     privileged: true
     restart: always
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    network_mode: host
     volumes:
       - ./frpc.ini:/etc/frp/frpc.ini  # 替换为你的frpc.ini配置文件路径
     command: frpc -c /etc/frp/frpc.ini
