@@ -48,7 +48,6 @@ services:
       - "traefik.enable=true"
       - "traefik.http.services.photoprism.loadbalancer.server.port=2342"
       - "traefik.http.services.photoprism.loadbalancer.server.scheme=http"
-      - "traefik.http.routers.photoprism.entrypoints=websecure"
       - "traefik.http.routers.photoprism.rule=Host(`album.hawtech.cn`)"
       - "traefik.http.routers.photoprism.tls=false"
     environment:
