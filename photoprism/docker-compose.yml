@@ -49,7 +49,6 @@ services:
       - "traefik.http.services.photoprism.loadbalancer.server.port=2342"
       - "traefik.http.services.photoprism.loadbalancer.server.scheme=http"
       - "traefik.http.routers.photoprism.rule=Host(`album.hawtech.cn`)"
-      - "traefik.http.routers.photoprism.tls=false"
     environment:
       PHOTOPRISM_ADMIN_USER: "love"                 # admin login username
       PHOTOPRISM_ADMIN_PASSWORD: "20230304,5201314"          # initial admin password (8-72 characters)
