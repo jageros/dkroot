@@ -13,7 +13,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.services.memos.loadbalancer.server.port=5230"
       - "traefik.http.services.memos.loadbalancer.server.scheme=http"
-      - "traefik.http.routers.memos.rule=Host(`memos.hawtech.cn`)"
+      - "traefik.http.routers.memos.rule=Host(`soul.hawtech.cn`)"
     volumes:
       - ./data:/var/opt/memos
     environment:
