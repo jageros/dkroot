@@ -44,11 +44,18 @@ services:
       - apparmor:unconfined
     ports:
       - "2342:2342" # HTTP port (host:container)
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.photoprism.loadbalancer.server.port=2342"
+      - "traefik.http.services.photoprism.loadbalancer.server.scheme=http"
+      - "traefik.http.routers.photoprism.entrypoints=websecure"
+      - "traefik.http.routers.photoprism.rule=Host(`album.hawtech.cn`)"
+      - "traefik.http.routers.photoprism.tls=false"
     environment:
       PHOTOPRISM_ADMIN_USER: "love"                 # admin login username
       PHOTOPRISM_ADMIN_PASSWORD: "20230304,5201314"          # initial admin password (8-72 characters)
       PHOTOPRISM_AUTH_MODE: "password"               # authentication mode (public, password)
-      PHOTOPRISM_SITE_URL: "http://photoprism.me:2342/"  # server URL in the format "http(s)://domain.name(:port)/(path)"
+      PHOTOPRISM_SITE_URL: "http://album.hawtech.cn"  # server URL in the format "http(s)://domain.name(:port)/(path)"
       PHOTOPRISM_ORIGINALS_LIMIT: 5000               # file size limit for originals in MB (increase for high-res video)
       PHOTOPRISM_HTTP_COMPRESSION: "gzip"            # improves transfer speed and bandwidth utilization (none or gzip)
       PHOTOPRISM_LOG_LEVEL: "info"                   # log level: trace, debug, info, warning, error, fatal, or panic
