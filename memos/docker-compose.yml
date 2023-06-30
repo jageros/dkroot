@@ -18,3 +18,7 @@ services:
       - ./data:/var/opt/memos
     environment:
       TZ: Asia/Shanghai
+
+networks:
+  traefik-network:
+    external: true

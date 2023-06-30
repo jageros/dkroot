@@ -149,3 +149,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "~/.docker/config.json:/config.json" # optional, for authentication if you have a Docker Hub account
+
+networks:
+  traefik-network:
+    external: true
