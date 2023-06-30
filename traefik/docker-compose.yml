@@ -9,6 +9,8 @@ services:
     restart: always
     # Enables the web UI and tells Traefik to listen to docker
     command: --api.insecure=true --providers.docker
+    networks:
+      - traefik-network
     ports:
       # The HTTP port
       - "80:80"
@@ -22,3 +24,7 @@ services:
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  traefik-network:
+    external: true

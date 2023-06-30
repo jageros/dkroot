@@ -43,6 +43,8 @@ services:
     security_opt:
       - seccomp:unconfined
       - apparmor:unconfined
+    networks:
+      - traefik-network
     ports:
       - "2342:2342" # HTTP port (host:container)
     labels:
