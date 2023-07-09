@@ -1,11 +1,11 @@
 version: "3"
 
 networks:
-  gitea:
-    external: false
+  traefik-network:
+    external: true
 
 services:
-  server:
+  gitea:
     image: gitea/gitea:1.19
     container_name: gitea
 #    environment:
@@ -13,11 +13,16 @@ services:
 #      - USER_GID=1000
     restart: always
     networks:
-      - gitea
+      - traefik-network
+    ports:
+      - "3000:3000"
+      - "22:22"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.gitea.loadbalancer.server.port=3000"
+      - "traefik.http.services.gitea.loadbalancer.server.scheme=http"
+      - "traefik.http.routers.gitea.rule=Host(`git.hawtech.cn`)"
     volumes:
       - ./data:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-    ports:
-      - "3000:3000"
-      - "22:22"
