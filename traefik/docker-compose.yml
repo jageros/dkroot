@@ -8,7 +8,15 @@ services:
     privileged: true
     restart: always
     # Enables the web UI and tells Traefik to listen to docker
-    command: --api.insecure=true --providers.docker
+    command:
+      - --api.insecure=true
+      - --providers.docker
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --certificatesresolvers.myresolver.acme.email=lhj168os@gmail.com
+      - --certificatesresolvers.myresolver.acme.storage=/data/acme.json
+      - --certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web
     networks:
       - traefik-network
     ports:
@@ -20,10 +28,12 @@ services:
       - "traefik.enable=true"
       - "traefik.http.services.keycloak.loadbalancer.server.port=8080"
       - "traefik.http.routers.keycloak.rule=Host(`traefik.hawtech.cn`)"
-      - "traefik.http.routers.keycloak.tls=flase"
+      - "traefik.http.routers.keycloak.tls=true"
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./data:/data
+      - ./data/acme:/etc/traefik/acme
 
 networks:
   traefik-network:

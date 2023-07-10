@@ -1,13 +1,23 @@
 version: "3.8"
 
+networks:
+  traefik-network:
+    external: true
+
 services:
   mysql:
     image: mysql:8.0
     container_name: mysql
     privileged: true
     restart: always
+    networks:
+      - traefik-network
     ports:
       - "3306:3306"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mysql.rule=Host(`mysql.hawtech.cn`)"
+      - "traefik.http.services.mysql.loadbalancer.server.port=3306"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./conf/mysql:/etc/mysql
