@@ -9,14 +9,14 @@ services:
     restart: always
     # Enables the web UI and tells Traefik to listen to docker
     command:
-      - --api.insecure=true
-      - --providers.docker
-      - --providers.docker.exposedbydefault=false
-      - --entrypoints.web.address=:80
-      - --entrypoints.websecure.address=:443
-      - --certificatesresolvers.myresolver.acme.email=lhj168os@gmail.com
-      - --certificatesresolvers.myresolver.acme.storage=/data/acme.json
-      - --certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web
+      - "--api.insecure=true"
+      - "--providers.docker"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.email=lhj168os@gmail.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/data/acme.json"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
     networks:
       - traefik-network
     ports:
