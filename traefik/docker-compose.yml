@@ -20,7 +20,8 @@ services:
       - "traefik.http.routers.keycloak.tls.certresolver=myresolver"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./conf:/conf
+      - ./conf/traefik.yml:/conf/traefik.yml
+      - ./conf/conf.d:/conf/conf.d
       - ./data:/data
       - ./data/acme:/etc/traefik/acme
 

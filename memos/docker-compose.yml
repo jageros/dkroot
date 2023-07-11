@@ -14,6 +14,7 @@ services:
       - "traefik.http.services.memos.loadbalancer.server.port=5230"
       - "traefik.http.services.memos.loadbalancer.server.scheme=http"
       - "traefik.http.routers.memos.rule=Host(`soul.hawtech.cn`)"
+      - "traefik.http.routers.memos.tls.certresolver=myresolver"
     volumes:
       - ./data:/var/opt/memos
     environment:
