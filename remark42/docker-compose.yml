@@ -27,8 +27,8 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.services.remark.loadbalancer.server.port=8080"
-      - "traefik.http.services.remark.loadbalancer.server.scheme=http"
       - "traefik.http.routers.remark.rule=Host(`remark.hawtech.cn`)"
+      - "traefik.http.routers.remark.tls.certresolver=myresolver"
     environment:
       - REMARK_URL=http://remark.hawtech.cn
       - SECRET=f0a3ed059c40bbc4b213da3367573041
