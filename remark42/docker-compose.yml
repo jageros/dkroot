@@ -21,9 +21,9 @@ services:
     networks:
       - traefik-network
     # uncomment to expose directly (no proxy)
-    ports:
-      - "8090:8080"
-      - "8443:8443"
+#    ports:
+#      - "8090:8080"
+#      - "8443:8443"
     labels:
       - "traefik.enable=true"
       - "traefik.http.services.gitea.loadbalancer.server.port=8080"
