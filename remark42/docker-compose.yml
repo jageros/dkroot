@@ -33,6 +33,8 @@ services:
       - REMARK_URL=remark.hawtech.cn
       - SECRET
       - DEBUG=true
+      - AUTH_ANON=true
+      - AUTH_EMAIL_ENABLE=true
       - AUTH_GOOGLE_CID
       - AUTH_GOOGLE_CSEC
       - AUTH_GITHUB_CID
