@@ -22,8 +22,8 @@ services:
     ports:
       # The HTTP port
       - "80:80"
+      - "443:443"
       # The Web UI (enabled by --api.insecure=true)
-      - "8080:8080"
     labels:
       - "traefik.enable=true"
       - "traefik.http.services.keycloak.loadbalancer.server.port=8080"
