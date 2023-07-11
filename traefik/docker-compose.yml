@@ -1,22 +1,13 @@
 version: '3'
 
 services:
-  reverse-proxy:
-    # The official v2 Traefik docker image
+  traefik:
     image: traefik:v2.10
     container_name: traefik
     privileged: true
     restart: always
-    # Enables the web UI and tells Traefik to listen to docker
     command:
-      - "--api.insecure=true"
-      - "--providers.docker"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
-      - "--certificatesresolvers.myresolver.acme.email=lhj168os@gmail.com"
-      - "--certificatesresolvers.myresolver.acme.storage=/data/acme.json"
-      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+      - "--configfile=/conf/traefik.yml"
     networks:
       - traefik-network
     ports:
@@ -32,6 +23,7 @@ services:
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./conf:/conf
       - ./data:/data
       - ./data/acme:/etc/traefik/acme
 

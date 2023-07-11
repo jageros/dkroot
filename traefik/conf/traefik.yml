@@ -1,0 +1,52 @@
+
+##- "--api.insecure=true"
+
+#- "--providers.docker"
+#- "--providers.docker.exposedbydefault=false"
+
+#- "--entrypoints.web.address=:80"
+#- "--entrypoints.websecure.address=:443"
+#- "--entrypoints.web.http.middlewares"
+
+#- "--certificatesresolvers.myresolver.acme.email=lhj168os@gmail.com"
+#- "--certificatesresolvers.myresolver.acme.storage=/data/acme.json"
+#- "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+
+api:
+  insecure: true
+  dashboard: true
+  debug: true
+
+providers:
+  providersThrottleDuration: 30s
+  docker:
+    exposedByDefault: false
+  file:
+    directory: /conf/conf.d
+    watch: true
+    filename: "*.yml"
+
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: web
+          scheme: https
+          permanent: true
+
+  websecure:
+    address: ":443"
+
+certificatesResolvers:
+  myresolver:
+    acme:
+      email: "lhj168os@gmail.com"
+      storage: "/data/acme.json"
+      httpChallenge:
+        entryPoint: web
+
+log:
+  level: INFO
+  filePath: /data/logs/traefik.log
