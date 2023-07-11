@@ -26,9 +26,9 @@ services:
 #      - "8443:8443"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.services.gitea.loadbalancer.server.port=8080"
-      - "traefik.http.services.gitea.loadbalancer.server.scheme=http"
-      - "traefik.http.routers.gitea.rule=Host(`remark.hawtech.cn`)"
+      - "traefik.http.services.remark.loadbalancer.server.port=8080"
+      - "traefik.http.services.remark.loadbalancer.server.scheme=http"
+      - "traefik.http.routers.remark.rule=Host(`remark.hawtech.cn`)"
     environment:
       - REMARK_URL=http://remark.hawtech.cn
       - SECRET=f0a3ed059c40bbc4b213da3367573041
