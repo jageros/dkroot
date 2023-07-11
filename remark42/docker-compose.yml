@@ -30,8 +30,10 @@ services:
       - "traefik.http.services.gitea.loadbalancer.server.scheme=http"
       - "traefik.http.routers.gitea.rule=Host(`remark.hawtech.cn`)"
     environment:
-      - REMARK_URL=remark.hawtech.cn
-      - SECRET
+      - REMARK_URL=http://remark.hawtech.cn
+      - SECRET=f0a3ed059c40bbc4b213da3367573041
+      - YOUR_SITE_ID=10086123
+      - ADMIN_SHARED_ID=10086123
       - DEBUG=true
       - AUTH_ANON=true
       - AUTH_EMAIL_ENABLE=true
